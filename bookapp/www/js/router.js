@@ -21,7 +21,7 @@ angular.module('starter.router', [])
     views: {
       'tab-dash': {
         templateUrl: 'templates/tab-dash.html',
-        controller: 'DashCtrl'
+        controller: 'LocalBookCtrl'
       }
     }
   })

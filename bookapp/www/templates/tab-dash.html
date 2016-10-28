@@ -1,6 +1,4 @@
 <ion-view view-title="">
-  
-  
   <ion-nav-bar>
   </ion-nav-bar>
    <div class="bar bar-header">
@@ -11,23 +9,108 @@
   
   <ion-content class="padding">
     <!-- <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap" href="#/tab/dash/pdf/file=compressed.tracemonkey-pldi-09.pdf">
-        查看09.pdf
+      <a class="item item-icon-left item-icon-right bookshelf" href='lib/pdfjs/web/viewer.html?file=/pdf/爱上统计学.pdf'">
+        <div class="bookshelfdiv" ng-controller="DocCtrl" >
+          <ng-pdf ng-if="pdfUrl" template-url="partials/viewer.html" canvasid="pdf" scale="page-fit"></ng-pdf>
+        </div>
+        <span>爱上统计学</span>
         <i class="icon ion-chevron-right icon-accessory"></i>
-        <ion-option-button class="button-assertive" ng-click="remove(chat)">
-          Delete
-        </ion-option-button>
-      </ion-item>
+      </a>   
     </ion-list> -->
     <ion-list>
-    <a class="item item-icon-left item-icon-right" href='lib/pdfjs/web/viewer.html?file=compressed.tracemonkey-pldi-09.pdf'>查看09.pdf
-    <!-- 
-    <a href="#" onclick="window.open('lib/pdfjs/web/viewer.html?file=compressed.tracemonkey-pldi-09.pdf','PDF','width:50%;height:50%;top:100;left:100;');">查看09.pdf</a>
-    <div class="wrapper" ng-controller="DocCtrl">
-     <ng-pdf ng-if="pdfUrl" template-url="partials/viewer.html" canvasid="pdf" scale="page-fit"></ng-pdf> 
-    </div>-->
-            <i class="icon ion-chevron-right icon-accessory"></i>
-    </a>
-    </ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="book in books" type="item-text-wrap" href="/lib/pdfjs/web/cover.html?file=/pdf/{{book.name}}.pdf">
+          <canvas id="{{book.id}}" name="/pdf/{{book.name}}.pdf" class="canvas" style="border:1px solid black;display: inline;float: left"></canvas>
+          <h2 >{{book.name}}</h2>
+          <i class="icon ion-chevron-right icon-accessory"></i>
+          <ion-checkbox ng-model="filter.blue" class="ion-chevron-right"></ion-checkbox>
+          <ion-option-button class="button-assertive" ng-click="remove(book)">
+            Delete
+          </ion-option-button>
+       </ion-item>
+     </ion-list>
   </ion-content>
+  <script type="text/javascript">
+    var clientWidth = document.body.clientWidth;
+    var clientHeight = document.documentElement.clientHeight;
+    //$(".bookshelfdiv").css('width',clientWidth*0.15);
+    $(document).ready(function() {
+        $("canvas").each(function(){
+          //alert($(this).attr("id"));
+         
+          var url = $(this).attr("name");
+          var cavid = $(this).attr("id");
+          var scale = 0.08;
+          bookFace(url,cavid,scale);
+          $("a").css("padding","2%");
+          $("label").css("padding",0);
+          //$(canvas).attr('height', 它爸的高);  
+          //$(canvas).attr('width', 它爸的宽);
+          
+        });
+    });
+   /* $(document).ready(function() {
+     htmlobj=$.ajax({url:"/lib/pdfjs/web/cover.html?file=/pdf/爱上统计学.pdf",async:false});
+    $(".bookshelfdiv").html(htmlobj.responseText);
+
+    //alert($("#show").val());
+    });*/
+    
+    //alert(document.document.body.clientWidth);
+    //alert(document.document.body.clientHeight);
+    //alert(document.documentElement.clientWidth);
+    //alert(document.documentElement.clientHeight);
+
+    //加载pdf封面方法
+    function bookFace(url,cavid,scale) {
+      //
+      // If absolute URL from the remote server is provided, configure the CORS
+      // header on that server.
+      //
+      //var url = '/pdf/爱上统计学.pdf';
+
+      //
+      // Disable workers to avoid yet another cross-origin issue (workers need
+      // the URL of the script to be loaded, and dynamically loading a cross-origin
+      // script does not work).
+      //
+      // PDFJS.disableWorker = true;
+
+      //
+      // The workerSrc property shall be specified.
+      //
+      //PDFJS.workerSrc = '../build/pdf.worker.js';
+
+      //
+      // Asynchronous download PDF
+      //
+      //var cavid = '1';
+      PDFJS.getDocument(url).then(function getPdfHelloWorld(pdf) {
+        //
+        // Fetch the first page
+        //
+        pdf.getPage(1).then(function getPageHelloWorld(page) {
+          //var scale = 0.08;
+          var viewport = page.getViewport(scale);
+          //
+          // Prepare canvas using PDF page dimensions
+          //
+          var canvas = document.getElementById(cavid);
+          var context = canvas.getContext('2d');
+          canvas.height = viewport.height;
+          canvas.width = viewport.width;
+
+          //
+          // Render PDF page into canvas context
+          //
+          var renderContext = {
+            canvasContext: context,
+            viewport: viewport
+          };
+          page.render(renderContext);
+        });
+      });
+    }
+
+
+  </script>
 </ion-view>

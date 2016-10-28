@@ -17,6 +17,14 @@ angular.module('starter.controllers', [])
   };
 })
 
+//本带书管理
+.controller('LocalBookCtrl', function($scope, Books) {
+  $scope.books = Books.all();
+  $scope.remove = function(book) {
+    Books.remove(book);
+  };
+})
+
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
   $scope.chat = Chats.get($stateParams.chatId);
 })
@@ -30,8 +38,8 @@ angular.module('starter.controllers', [])
 //pdf读取
 .controller('DocCtrl', function($scope) {
 
-  $scope.pdfName = 'Relativity: The Special and General Theory by Albert Einstein';
-  $scope.pdfUrl = 'pdf/relativity.pdf';
+  $scope.pdfName = '';
+  $scope.pdfUrl = 'pdf/爱上统计学.pdf';
   $scope.scroll = 0;
   $scope.loading = 'loading';
 

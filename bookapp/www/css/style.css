@@ -1,1 +1,8 @@
 /* Empty. Add your own CSS if you like */
+.bookshelf{
+	padding: 2%;
+}
+
+.bookshelfdiv{
+	border:5px solid red;
+}
