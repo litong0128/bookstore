@@ -1,15 +1,18 @@
-<ion-view view-title="">
-	<ion-nav-bar>
-	</ion-nav-bar>
-	<div class="bar bar-header item-input-inset">
-	<button class="button icon ion-qr-scanner"></button>
-	  <label class="item-input-wrapper">
+<ion-view view-title="书">
+
+  <ion-nav-buttons side="left">
+      <button class="button icon ion-qr-scanner button-clear" ng-click="doSomething()">
+      </button>
+      <label class="item-input-wrapper item-input-inset">
 	    <i class="icon ion-ios-search placeholder-icon"></i>
 	    <input type="search" placeholder="Search">
 	  </label>
-	  <button class="button button-clear">取消</button>
-	  <button class="button icon ion-android-cart"></button>
-	</div>
+  </ion-nav-buttons>
+  
+  <ion-nav-buttons side="right">
+      <button class="button icon ion-android-cart button-clear" ng-click="doSomething()">
+      </button>
+  </ion-nav-buttons>
   <ion-content>
     
   </ion-content>
