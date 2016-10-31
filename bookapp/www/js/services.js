@@ -57,7 +57,7 @@ angular.module('starter.services', [])
   // Some fake testing data
   var books = [{
     id: 0,
-    name: '爱上统计学',
+    name: 'relativity',
     lastText: 'You on your way?',
     face: 'img/ben.png'
   }, {
@@ -67,17 +67,17 @@ angular.module('starter.services', [])
     face: 'img/max.png'
   }, {
     id: 2,
-    name: 'compressed.tracemonkey-pldi-09',
+    name: 'relativity',
     lastText: 'I should buy a boat',
     face: 'img/adam.jpg'
   }, {
     id: 3,
-    name: '爱上统计学',
+    name: 'relativity',
     lastText: 'Look at my mukluks!',
     face: 'img/perry.png'
   }, {
     id: 4,
-    name: '爱上统计学',
+    name: 'relativity',
     lastText: 'This is wicked good ice cream.',
     face: 'img/mike.png'
   }];
