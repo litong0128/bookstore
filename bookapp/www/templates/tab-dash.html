@@ -1,11 +1,4 @@
 <ion-view view-title="全部">
-  <!-- <ion-nav-bar class="bar-positive">
-  </ion-nav-bar>
-   <div class="bar bar-header">
-      <button class="button icon ion-android-folder"></button>
-      <h1 class="title">全部</h1>
-      <button class="button">编辑</button>
-  </div>  -->
   <ion-nav-buttons side="left">
       <button class="button icon ion-android-folder button-clear" ng-click="doSomething()">
       </button>
@@ -16,18 +9,9 @@
       </button>
   </ion-nav-buttons>
   <ion-content class="padding">
-    <!-- <ion-list>
-      <a class="item item-icon-left item-icon-right bookshelf" href='lib/pdfjs/web/viewer.html?file=/pdf/爱上统计学.pdf'">
-        <div class="bookshelfdiv" ng-controller="DocCtrl" >
-          <ng-pdf ng-if="pdfUrl" template-url="partials/viewer.html" canvasid="pdf" scale="page-fit"></ng-pdf>
-        </div>
-        <span>爱上统计学</span>
-        <i class="icon ion-chevron-right icon-accessory"></i>
-      </a>   
-    </ion-list> -->
     <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="book in books" type="item-text-wrap" href="/lib/pdfjs/web/cover.html?file=/pdf/{{book.name}}.pdf">
-          <canvas id="{{book.id}}" name="/pdf/{{book.name}}.pdf" class="canvas" style="border:1px solid black;display: inline;float: left"></canvas>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="book in books" type="item-text-wrap" href="lib/pdfjs/web/cover.html?file=/pdf/{{book.name}}.pdf">
+          <canvas id="{{book.id}}" name="pdf/{{book.name}}.pdf" class="canvas" style="border:0px solid black;display: inline;float: left;height:0;width:0"></canvas>
           <h2 >{{book.name}}</h2>
           <i class="icon ion-chevron-right icon-accessory"></i>
           <!-- <ion-checkbox ng-model="filter.blue" class="ion-chevron-right"></ion-checkbox> -->
@@ -39,35 +23,21 @@
   </ion-content>
   <script type="text/javascript">
     var clientWidth = document.body.clientWidth;
-    var clientHeight = document.documentElement.clientHeight;
-    //$(".bookshelfdiv").css('width',clientWidth*0.15);
+    var clientHeight = document.body.clientHeight;
     $(document).ready(function() {
         $("canvas").each(function(){
           //alert($(this).attr("id"));
-         
+          $(this).css('height', clientWidth*0.2);  
+          $(this).css('width', clientWidth*0.15);
           var url = $(this).attr("name");
           var cavid = $(this).attr("id");
           var scale = 0.08;
           bookFace(url,cavid,scale);
           $("a").css("padding","2%");
           $("label").css("padding",0);
-          //$(canvas).attr('height', 它爸的高);  
-          //$(canvas).attr('width', 它爸的宽);
-          
         });
     });
-   /* $(document).ready(function() {
-     htmlobj=$.ajax({url:"/lib/pdfjs/web/cover.html?file=/pdf/爱上统计学.pdf",async:false});
-    $(".bookshelfdiv").html(htmlobj.responseText);
-
-    //alert($("#show").val());
-    });*/
-    
-    //alert(document.document.body.clientWidth);
-    //alert(document.document.body.clientHeight);
-    //alert(document.documentElement.clientWidth);
-    //alert(document.documentElement.clientHeight);
-
+   
     //加载pdf封面方法
     function bookFace(url,cavid,scale) {
       //
@@ -118,7 +88,6 @@
         });
       });
     }
-
 
   </script>
 </ion-view>

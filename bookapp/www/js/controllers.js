@@ -18,11 +18,24 @@ angular.module('starter.controllers', [])
 })
 
 //本带书管理
-.controller('LocalBookCtrl', function($scope, Books) {
+.controller('LocalBookCtrl', function($scope, Books, $timeout, $ionicLoading) {
   $scope.books = Books.all();
   $scope.remove = function(book) {
     Books.remove(book);
   };
+
+
+   $ionicLoading.show({
+      content: 'Loading',
+      animation: 'fade-in',
+      showBackdrop: true,
+      maxWidth: 200,
+      showDelay: 0
+    });
+
+    $timeout(function () {
+      $ionicLoading.hide();
+    }, 2000);
 })
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
@@ -34,6 +47,24 @@ angular.module('starter.controllers', [])
     enableFriends: true
   };
 })
+
+
+.controller("BarcodeController", function($scope, $cordovaBarcodeScanner) {
+
+ $scope.scanBarcode = function() {
+   alert("123");
+    $cordovaBarcodeScanner.scan().then(function(imageData) {
+        alert(imageData.text);
+        console.log("Barcode Format -> " + imageData.format);
+        console.log("Cancelled -> " + imageData.cancelled);
+    }, function(error) {
+        console.log("An error happened -> " + error);
+    });
+  };
+})
+
+
+
 
 //pdf读取
 .controller('DocCtrl', function($scope) {
@@ -62,4 +93,4 @@ angular.module('starter.controllers', [])
 
 });
 
-;
+
